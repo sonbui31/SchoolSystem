@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.2.1",
+    "date-fns": "^4.1.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
