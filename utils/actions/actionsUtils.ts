@@ -20,7 +20,8 @@ export async function selectDropdownOption(
 }
 export async function clickDropdownOption(
   comboLocator: Locator,
-  optionText: string
+  optionText: string,
+  page: Page
 ) {
-  await this.selectDropdownOption(comboLocator, optionText);
+  await selectDropdownOption(comboLocator, optionText, page);
 }
