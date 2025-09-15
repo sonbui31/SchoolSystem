@@ -10,32 +10,9 @@ import {
 } from "../utils/actions/paginationUtils";
 import { clickCreateTime } from "../utils/date/datePickerUtils";
 import { scrollToBottom } from "../utils/actions/scrollUtils";
+import { BasePage } from "../basePage/basePage";
 
-export class ParentPage {
-  page: Page;
-
-  // ========== Header ==========
-  readonly accountIcon: Locator;
-  readonly logoutIcon: Locator;
-
-  // ========== Table ==========
-  readonly bodyRows: Locator;
-  readonly pagination: Locator;
-  readonly dropDown: Locator;
-  readonly tableBody: Locator;
-
-  // ========== Actions ==========
-  readonly addButton: Locator;
-  readonly acceptButton: Locator;
-  readonly closeButton: Locator;
-  readonly excelButton: Locator;
-  readonly browseAllButton: Locator;
-  readonly reloadButton: Locator;
-
-  // ========== Status ==========
-  readonly approvedTag: Locator;
-  readonly notApprovedTag: Locator;
-
+export class ParentPage extends BasePage {
   // ========== Form ==========
   readonly fullNameInput: Locator;
   readonly emailInput: Locator;
@@ -46,8 +23,7 @@ export class ParentPage {
   readonly businessStaffCombo: Locator;
 
   // ========== Search ==========
-  readonly searchToggle: Locator;
-  readonly searchButton: Locator;
+
   readonly parentCodeInput: Locator;
   readonly businessStaffCodeCombo: Locator;
   readonly statusCombo: Locator;
@@ -57,40 +33,7 @@ export class ParentPage {
   readonly drawerCloseButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-
-    // Header
-    this.accountIcon = page.getByRole("button", { name: "user" });
-    this.logoutIcon = page.getByText("Đăng xuất");
-
-    // Table
-    this.tableBody = page.locator(".ant-table-body");
-    this.bodyRows = page.locator(".ant-table-row");
-    this.pagination = page.locator(".ant-select-selection-item", {
-      hasText: "/ page",
-    });
-    this.dropDown = page.locator(".ant-select-dropdown");
-
-    // Actions
-    this.addButton = page.getByRole("button", { name: "plus-circle Thêm mới" });
-    this.acceptButton = page.getByRole("button", {
-      name: "check",
-      exact: true,
-    });
-    this.closeButton = page.getByRole("button", { name: "close", exact: true });
-    this.excelButton = page.getByRole("button", {
-      name: "download Xuất Excel",
-    });
-    this.browseAllButton = page.getByRole("button", {
-      name: "check-circle Duyệt tất cả",
-    });
-    this.reloadButton = page.getByRole("button", {
-      name: "reload Tải lại dữ liệu",
-    });
-
-    // Status
-    this.approvedTag = page.locator(".ant-tag").first();
-    this.notApprovedTag = page.getByText("Chưa duyệt");
+    super(page);
 
     // Form
     this.fullNameInput = page.locator("#full_name");
@@ -102,13 +45,7 @@ export class ParentPage {
     this.businessStaffCombo = page.locator("#business_staff");
 
     // Search
-    this.searchToggle = page.getByRole("button", {
-      name: "search Hiện tìm kiếm",
-    });
-    this.searchButton = page.getByRole("button", {
-      name: "Tìm kiếm",
-      exact: true,
-    });
+
     this.parentCodeInput = page.locator("#code");
 
     this.businessStaffCodeCombo = page.getByRole("combobox", {

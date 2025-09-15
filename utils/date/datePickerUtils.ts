@@ -54,3 +54,30 @@ export async function clickCreateTime(
     await selectDate(endPanel, endYear, endMonth, endDay);
   }
 }
+
+export async function clickDate(
+  page: Page,
+  dateInput: Locator,
+  dateStr: string
+) {
+  const [year, month, day] = splitDate(dateStr);
+
+  // Mở DatePicker
+  await dateInput.click();
+
+  const datePicker = page.locator(".ant-picker-dropdown").last();
+  await expect(datePicker).toBeVisible();
+
+  const panel = datePicker.locator(".ant-picker-panel").first();
+
+  // Nếu panel chưa đúng tháng/năm -> điều hướng tới
+  const targetMonth = getMonthShort(year, month);
+  await navigateToMonthYear(panel, datePicker, year, targetMonth);
+
+  // Chọn ngày
+  const target = `${year}-${month}-${day}`;
+  const dayCell = panel.getByTitle(target);
+
+  await expect(dayCell).toBeVisible({ timeout: 5000 });
+  await dayCell.click();
+}

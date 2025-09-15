@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
+import path from "path";
 
 export async function goToUrl(page: Page, url: string) {
   await page.goto(url);
@@ -24,4 +25,9 @@ export async function clickDropdownOption(
   page: Page
 ) {
   await selectDropdownOption(comboLocator, optionText, page);
+}
+
+export async function uploadImage(fileInput: Locator, filePath: string) {
+  const absolutePath = path.resolve(filePath);
+  await fileInput.setInputFiles(absolutePath);
 }

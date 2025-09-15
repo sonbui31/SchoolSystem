@@ -1,9 +1,11 @@
 import { Page } from "@playwright/test";
+import { error } from "console";
 import path from "path";
 
 export const urls = {
   login: "https://classroom-management.vfast.pro",
   parent: "https://classroom-management.vfast.pro/parent",
+  student: "https://classroom-management.vfast.pro/student",
 };
 
 export const SCREENSHOT_PATHS = {
@@ -19,7 +21,7 @@ export const filePaths = {
   logoutSuccess: "logout-success.png",
   approved: "search-by-status_approved.png",
   notApproved: "search-by-status_notApproved.png",
-  browseAll: "browse-all.png"
+  browseAll: "browse-all.png",
 };
 // Helper functions
 export const takeScreenshot = async (
@@ -47,3 +49,11 @@ export const TIMEOUTS = {
   medium: 2000,
   long: 3000,
 };
+
+export const notification = {
+  success: "Thêm mới thành công.",
+  errorInput: "Không bỏ trống !",
+  errorEmail : "Hãy nhập email hợp lệ!",
+  updatedSuccessfully: "Cập nhật thành công",
+  deleteSuccess: "Xóa bản ghi thành công",
+}

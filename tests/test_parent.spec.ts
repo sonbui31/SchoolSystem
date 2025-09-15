@@ -1,4 +1,8 @@
-import { filePaths, SCREENSHOT_PATHS } from "./../test_data/constants";
+import {
+  filePaths,
+  notification,
+  SCREENSHOT_PATHS,
+} from "./../test_data/constants";
 import { Page } from "@playwright/test";
 import { test, expect } from "../fixtures/fixtures";
 import { downloadExcel, verifyExcelDownload } from "../utils/excelUtils";
@@ -18,7 +22,6 @@ import {
   waitAndScreenshot,
 } from "../test_data/constants";
 import { isWithinInterval, parse } from "date-fns";
-import { ParentPage } from "../pages/parent.page";
 import fs from "fs";
 
 test.use({ storageState: "auth.json" });
@@ -52,7 +55,7 @@ test.describe("Parent Management Functions", () => {
         user.note,
         user.bussinessStaff
       );
-      await expect(page.getByText("Thêm mới thành công.")).toBeVisible();
+      await expect(page.getByText(notification.success)).toBeVisible();
     });
 
     test("Add new parent without business staff", async ({
@@ -68,7 +71,7 @@ test.describe("Parent Management Functions", () => {
         user.facebook,
         user.note
       );
-      await expect(page.getByText("Thêm mới thành công.")).toBeVisible();
+      await expect(page.getByText(notification.success)).toBeVisible();
       await takeScreenshot(page, SCREENSHOT_PATHS.parent, filePaths.addSuccess);
     });
     test("Add parent without Fullname", async ({ page, parentPage }) => {
@@ -82,7 +85,7 @@ test.describe("Parent Management Functions", () => {
         user.note,
         user.bussinessStaff
       );
-      await expect(page.getByText("Không bỏ trống !")).toBeVisible();
+      await expect(page.getByText(notification.errorInput)).toBeVisible();
     });
     test.describe("Email input", () => {
       const invalidEmails = [
@@ -103,7 +106,7 @@ test.describe("Parent Management Functions", () => {
             user.note,
             user.bussinessStaff
           );
-          await expect(page.getByText("Hãy nhập email hợp lệ!")).toBeVisible();
+          await expect(page.getByText(notification.errorEmail)).toBeVisible();
         });
       }
 
@@ -118,7 +121,7 @@ test.describe("Parent Management Functions", () => {
           user.note,
           user.bussinessStaff
         );
-        await expect(page.getByText("Thêm mới thành công.")).toBeVisible();
+        await expect(page.getByText(notification.success)).toBeVisible();
       });
     });
     test.describe("The textbox is not required", () => {
@@ -149,7 +152,7 @@ test.describe("Parent Management Functions", () => {
             user.note,
             user.bussinessStaff
           );
-          await expect(page.getByText("Thêm mới thành công.")).toBeVisible();
+          await expect(page.getByText(notification.success)).toBeVisible();
         });
       }
     });
@@ -170,7 +173,9 @@ test.describe("Parent Management Functions", () => {
       // expect(value).toBe("");
 
       //check dữ liệu đã được cập nhật thành công ở phía FE
-      await expect(page.getByText("Cập nhật thành công")).toBeVisible();
+      await expect(
+        page.getByText(notification.updatedSuccessfully)
+      ).toBeVisible();
       const noteCell = page
         .getByRole("row", { name: updatedUser.name })
         .locator("#note");
@@ -186,7 +191,7 @@ test.describe("Parent Management Functions", () => {
   test("Delete parent function", async ({ page, parentPage }) => {
     await parentPage.clickDeleteButton(TEST_DATA.data.user2.name);
     await page.waitForTimeout(TIMEOUTS.short);
-    await expect(page.getByText("Xóa bản ghi thành công")).toBeVisible();
+    await expect(page.getByText(notification.deleteSuccess)).toBeVisible();
     await takeScreenshot(
       page,
       SCREENSHOT_PATHS.parent,
@@ -228,7 +233,9 @@ test.describe("Parent Management Functions", () => {
       await page.getByRole("button", { name: "Có" }).click();
 
       // Verify success toast
-      await expect(page.getByText("Cập nhật thành công")).toBeVisible();
+      await expect(
+        page.getByText(notification.updatedSuccessfully)
+      ).toBeVisible();
 
       // Verify latest row buttons disabled
       const count = await rows.count();
@@ -242,7 +249,9 @@ test.describe("Parent Management Functions", () => {
     }) => {
       const user = TEST_DATA.data.user3.name;
       await parentPage.notApprovedParent(user);
-      await expect(page.getByText("Cập nhật thành công")).toBeVisible();
+      await expect(
+        page.getByText(notification.updatedSuccessfully)
+      ).toBeVisible();
       // Verify buttons disabled for that row
       const rows = parentPage.bodyRows;
       const row = rows.filter({ hasText: user });
@@ -267,7 +276,9 @@ test.describe("Parent Management Functions", () => {
       //     (await row.locator(parentPage.approvedTag).count()) > 0;
       //   await assertRowActions(row, isApproved, i);
       // }
-      await expect(page.getByText("Cập nhật thành công")).toBeVisible();
+      await expect(
+        page.getByText(notification.updatedSuccessfully)
+      ).toBeVisible();
     });
 
     test("If all are in approved status, click approve all again", async ({

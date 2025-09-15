@@ -23,7 +23,7 @@ export async function verifyRowsPerPage(
   const rowCount = await rowLocator.count();
   if (rowCount > expectedRows) {
     throw new Error(
-      `Số dòng hiển thị là ${rowCount}, nhưng mong đợi ${expectedRows}`
+      `Có ${rowCount} dòng hiển thị, vượt quá số mong đợi là ${expectedRows}`
     );
   }
 }
