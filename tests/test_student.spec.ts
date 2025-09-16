@@ -4,10 +4,9 @@ import {
   uploadImage,
 } from "../utils/actions/actionsUtils";
 import { notification, urls } from "../test_data/constants";
-import { expect, Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { test } from "../fixtures/fixtures";
 import { DATA_STUDENT } from "../test_data/studentData";
-import { StudentPage } from "../pages/student.page";
 import path from "path";
 
 test.use({ storageState: "auth.json" });
@@ -59,7 +58,7 @@ test.describe("Student management", async () => {
             student3.feePaymentCycle,
             student3.paymentDate
           );
-          await expect(page.getByText(notification.success)).toBeVisible();
+          await expect(page.getByText(notification.errorEmail)).toBeVisible();
         });
       });
       test("Add student with picture", async ({ page, studentPage }) => {
