@@ -10,7 +10,7 @@ export const urls = {
 
 export const SCREENSHOT_PATHS = {
   parent: "screenshots/parent",
-  student: "screenshots/student"
+  student: "screenshots/student",
 };
 export const filePaths = {
   ui: "parent-page-ui.png",
@@ -53,8 +53,8 @@ export const TIMEOUTS = {
 
 export const notification = {
   success: "Thêm mới thành công.",
-  errorInput: "Không bỏ trống !",
-  errorEmail : "Hãy nhập email hợp lệ!",
+  errorInput: "Không bỏ trống!",
+  errorEmail: "Hãy nhập email hợp lệ!",
   updatedSuccessfully: "Cập nhật thành công",
   deleteSuccess: "Xóa bản ghi thành công",
-}
+};

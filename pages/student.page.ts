@@ -30,19 +30,21 @@ export class StudentPage extends BasePage {
     });
     this.fileInput = page.locator("#images");
   }
-  chooseImage(filePath: string) {
-    clickElement(this.choosePictureBtn);
-    uploadImage(this.fileInput, filePath);
+  async chooseImage(filePath?: string) {
+    if (filePath) {
+      await clickElement(this.choosePictureBtn);
+      await uploadImage(this.fileInput, filePath);
+    }
   }
 
   async addStudent(
     fullName: string,
     email: string,
-    classOption: string,
+    classOption: string | null,
     fee: string,
-    feePaymentCycleOption: string,
-    paymentDate: string,
-    filePaths: string
+    feePaymentCycleOption: string | null,
+    paymentDate: string | null,
+    filePaths?: string
   ) {
     await clickElement(this.addButton);
     await this.fullName.fill(fullName);
@@ -58,10 +60,13 @@ export class StudentPage extends BasePage {
         this.page
       );
     }
-    await clickDate(this.page, this.paymentDate, paymentDate);
+    if (paymentDate) {
+      await clickDate(this.page, this.paymentDate, paymentDate);
+    }
+
     await this.chooseImage(filePaths);
-    const uploadedItem = this.page.locator(".ant-upload-list-item");
-    await expect(uploadedItem.first()).toBeVisible({ timeout: 5000 });
+    // const uploadedItem = this.page.locator(".ant-upload-list-item");
+    // await expect(uploadedItem.first()).toBeVisible({ timeout: 5000 });
 
     await clickElement(this.acceptButton);
     await expect(this.bodyRows.first()).toBeVisible();

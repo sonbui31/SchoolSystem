@@ -139,12 +139,31 @@ export const TEST_DATA = {
   },
 
   student: {
-    fullName: "Lả lướt",
-    email: "test@gmail.com",
-    class: "Lớp toán nâng cao",
-    fee: "1000000",
-    feePaymentCycle: "1 tháng",
-    paymentDate: "2025-09-01",
-    filePaths: "../assets/student.jpg",
+    blankFullName: {
+      fullName: "",
+      email: "test@gmail.com",
+      class: "Lớp toán nâng cao",
+      fee: "1000000",
+      feePaymentCycle: "1 tháng",
+      paymentDate: "2025-09-01",
+    },
+    student1: {
+      fullName: "Nguyễn Thị L",
+      email: "test@gmail.com",
+      class: "Lớp toán nâng cao",
+      fee: "1000000",
+      feePaymentCycle: "1 tháng",
+      paymentDate: "2025-09-01",
+      filePaths: "../assets/student.jpg",
+    },
+    student3: {
+      fullName: "Nguyễn Thị L",
+      email: "test@gmail.com",
+      class: "Lớp toán nâng cao",
+      fee: "1000000",
+      feePaymentCycle: "1 tháng",
+      paymentDate: "2025-09-01",
+      filePaths: "../assets/student.jpg",
+    },
   },
 };
