@@ -45,7 +45,7 @@ test("Parent Page Access", async ({ page, parentPage }) => {
 test.describe("Parent Management Functions", () => {
   test.describe("Add Parent function", () => {
     test("Add new parent with business staff", async ({ page, parentPage }) => {
-      const user = TEST_DATA.data.user1;
+      const user = TEST_DATA.parent.user1;
       await parentPage.addParent(
         user.name,
         user.email,
@@ -62,7 +62,7 @@ test.describe("Parent Management Functions", () => {
       page,
       parentPage,
     }) => {
-      const user = TEST_DATA.data.user2;
+      const user = TEST_DATA.parent.user2;
       await parentPage.addParent(
         user.name,
         user.email,
@@ -75,7 +75,7 @@ test.describe("Parent Management Functions", () => {
       await takeScreenshot(page, SCREENSHOT_PATHS.parent, filePaths.addSuccess);
     });
     test("Add parent without Fullname", async ({ page, parentPage }) => {
-      const user = TEST_DATA.data.emptyFullname;
+      const user = TEST_DATA.parent.emptyFullname;
       await parentPage.addParent(
         user.name,
         user.email,
@@ -89,9 +89,9 @@ test.describe("Parent Management Functions", () => {
     });
     test.describe("Email input", () => {
       const invalidEmails = [
-        { case: "without email", data: TEST_DATA.data.emptyEmail },
-        { case: "with empty email", data: TEST_DATA.data.emptyEmail },
-        { case: "with invalid email", data: TEST_DATA.data.invalidEmail },
+        { case: "without email", data: TEST_DATA.parent.emptyEmail },
+        { case: "with empty email", data: TEST_DATA.parent.emptyEmail },
+        { case: "with invalid email", data: TEST_DATA.parent.invalidEmail },
       ];
 
       for (const scenario of invalidEmails) {
@@ -111,7 +111,7 @@ test.describe("Parent Management Functions", () => {
       }
 
       test("Remove spaces at both ends", async ({ page, parentPage }) => {
-        const user = TEST_DATA.data.trimdEmail;
+        const user = TEST_DATA.parent.trimdEmail;
         await parentPage.addParent(
           user.name,
           user.email,
@@ -126,17 +126,17 @@ test.describe("Parent Management Functions", () => {
     });
     test.describe("The textbox is not required", () => {
       const invalidEmails = [
-        { case: "with blank phone", data: TEST_DATA.data.emptyPhone },
-        { case: "with blank address", data: TEST_DATA.data.emptyAddress },
-        { case: "with blank facebook", data: TEST_DATA.data.emptyFacebook },
-        { case: "with blank note", data: TEST_DATA.data.emptyNote },
+        { case: "with blank phone", data: TEST_DATA.parent.emptyPhone },
+        { case: "with blank address", data: TEST_DATA.parent.emptyAddress },
+        { case: "with blank facebook", data: TEST_DATA.parent.emptyFacebook },
+        { case: "with blank note", data: TEST_DATA.parent.emptyNote },
         {
           case: "with blank bussiness staff",
-          data: TEST_DATA.data.emptyBussinessStaff,
+          data: TEST_DATA.parent.emptyBussinessStaff,
         },
         {
           case: "with blank text box not required",
-          data: TEST_DATA.data.notRequire,
+          data: TEST_DATA.parent.notRequire,
         },
       ];
 
@@ -160,8 +160,8 @@ test.describe("Parent Management Functions", () => {
 
   test.describe("Edit Parent function", () => {
     test("Edit parent", async ({ page, parentPage }) => {
-      const originalUser = TEST_DATA.data.user1;
-      const updatedUser = TEST_DATA.data.updated;
+      const originalUser = TEST_DATA.parent.user1;
+      const updatedUser = TEST_DATA.parent.updated;
       await parentPage.clickEditButton(originalUser.name);
       await fillField(parentPage.fullNameInput, updatedUser.name);
       await fillField(parentPage.emailInput, updatedUser.email);
@@ -189,7 +189,7 @@ test.describe("Parent Management Functions", () => {
   });
 
   test("Delete parent function", async ({ page, parentPage }) => {
-    await parentPage.clickDeleteButton(TEST_DATA.data.user2.name);
+    await parentPage.clickDeleteButton(TEST_DATA.parent.user2.name);
     await page.waitForTimeout(TIMEOUTS.short);
     await expect(page.getByText(notification.deleteSuccess)).toBeVisible();
     await takeScreenshot(
@@ -214,7 +214,7 @@ test.describe("Parent Management Functions", () => {
       page,
       parentPage,
     }) => {
-      const user = TEST_DATA.data.user3;
+      const user = TEST_DATA.parent.user3;
       const rows = parentPage.bodyRows;
 
       // Add parent
@@ -247,7 +247,7 @@ test.describe("Parent Management Functions", () => {
       page,
       parentPage,
     }) => {
-      const user = TEST_DATA.data.user3.name;
+      const user = TEST_DATA.parent.user3.name;
       await parentPage.notApprovedParent(user);
       await expect(
         page.getByText(notification.updatedSuccessfully)
@@ -300,7 +300,7 @@ test.describe("Parent Management Functions", () => {
   });
   test.describe("Export file Function", () => {
     test("Export and Verify Excel file", async ({ page, parentPage }) => {
-      const filePath = TEST_DATA.excel.parents;
+      const filePath = TEST_DATA.parent.excel.parents;
       await expect(parentPage.bodyRows.first()).toBeVisible();
       const uiRowCount = await parentPage.bodyRows.count();
       // console.log(`Số lượng dòng UI thực tế: ${uiRowCount}`);
@@ -342,7 +342,7 @@ test.describe("Parent Management Functions", () => {
     const searchInput = [
       {
         name: "parent by code",
-        value: TEST_DATA.search.parentCode,
+        value: TEST_DATA.parent.search.parentCode,
         runSearch: (parentPage: any, value: string) =>
           parentPage.inputSearchText(value),
         locator: (page: Page, value: string) =>
@@ -351,7 +351,7 @@ test.describe("Parent Management Functions", () => {
       },
       {
         name: "business staff",
-        value: TEST_DATA.search.businessStaff,
+        value: TEST_DATA.parent.search.businessStaff,
         runSearch: (parentPage: any, value: string) =>
           parentPage.searchBussinessStaffName(value),
         locator: (page: Page, value: string) =>
@@ -359,7 +359,7 @@ test.describe("Parent Management Functions", () => {
       },
       {
         name: "approved status",
-        value: TEST_DATA.status.approved,
+        value: TEST_DATA.parent.status.approved,
         runSearch: (parentPage: any, value: string) =>
           parentPage.searchByStatus(value),
         locator: (page: Page, value: string) =>
@@ -368,7 +368,7 @@ test.describe("Parent Management Functions", () => {
       },
       {
         name: "not approved status",
-        value: TEST_DATA.status.notApproved,
+        value: TEST_DATA.parent.status.notApproved,
         runSearch: (parentPage: any, value: string) =>
           parentPage.searchByStatus(value),
         locator: (page: Page, value: string) =>
@@ -404,7 +404,7 @@ test.describe("Parent Management Functions", () => {
     }
 
     test("Search parent by create time", async ({ page, parentPage }) => {
-      const { start, end } = TEST_DATA.search.dateRange;
+      const { start, end } = TEST_DATA.parent.search.dateRange;
       await openSearchAndClose(page, parentPage, async () => {
         await parentPage.searchTime(start, end);
         await parentPage.searchButton.click();
@@ -432,7 +432,7 @@ test.describe("Parent Management Functions", () => {
   });
 
   test.describe("Parent Page Pagination function", () => {
-    const paginationOptions = TEST_DATA.pagination.options;
+    const paginationOptions = TEST_DATA.parent.pagination.options;
     paginationOptions.forEach((option) => {
       test(`Display ${option} rows per page`, async ({ parentPage }) => {
         await parentPage.setPagination(option.toString());

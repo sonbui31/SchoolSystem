@@ -1,5 +1,5 @@
 export const TEST_DATA = {
-  data: {
+  parent: {
     user1: {
       name: "Nguyễn Văn A",
       email: "vana@gmail.com",
@@ -62,7 +62,7 @@ export const TEST_DATA = {
       note: "Đây chỉ là test thôi",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     emptyPhone: {
+    emptyPhone: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "",
@@ -71,7 +71,7 @@ export const TEST_DATA = {
       note: "Đây chỉ là test thôi",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     emptyAddress: {
+    emptyAddress: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "0987654321",
@@ -80,7 +80,7 @@ export const TEST_DATA = {
       note: "Đây chỉ là test thôi",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     emptyFacebook: {
+    emptyFacebook: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "0987654321",
@@ -89,7 +89,7 @@ export const TEST_DATA = {
       note: "Đây chỉ là test thôi",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     emptyNote: {
+    emptyNote: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "0987654321",
@@ -98,7 +98,7 @@ export const TEST_DATA = {
       note: "",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     emptyBussinessStaff: {
+    emptyBussinessStaff: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "0987654321",
@@ -107,7 +107,7 @@ export const TEST_DATA = {
       note: "Ghi chú vớ vẩn",
       bussinessStaff: "Nguyễn Văn Hòa",
     },
-     notRequire: {
+    notRequire: {
       name: "Sơnnnn",
       email: "testabc@gmail.com",
       phone: "",
@@ -121,20 +121,30 @@ export const TEST_DATA = {
       email: "acb@gmail.com",
       phone: "0987654321",
     },
+    search: {
+      parentCode: "KH00005006",
+      businessStaff: "Phạm Thị Lan",
+      dateRange: { start: "2025-06-20", end: "2025-06-27" },
+    },
+    status: {
+      approved: "Đã duyệt",
+      notApproved: "Chưa duyệt",
+    },
+    pagination: {
+      options: [10, 20, 30, 50, 100],
+    },
+    excel: {
+      parents: "downloads/Quản_lý_phụ_huynh.xlsx",
+    },
   },
-  search: {
-    parentCode: "KH00005006",
-    businessStaff: "Phạm Thị Lan",
-    dateRange: { start: "2025-06-20", end: "2025-06-27" },
-  },
-  status: {
-    approved: "Đã duyệt",
-    notApproved: "Chưa duyệt",
-  },
-  pagination: {
-    options: [10, 20, 30, 50, 100],
-  },
-  excel: {
-    parents: "downloads/Quản_lý_phụ_huynh.xlsx",
+
+  student: {
+    fullName: "Lả lướt",
+    email: "test@gmail.com",
+    class: "Lớp toán nâng cao",
+    fee: "1000000",
+    feePaymentCycle: "1 tháng",
+    paymentDate: "2025-09-01",
+    filePaths: "../assets/student.jpg",
   },
 };

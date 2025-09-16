@@ -10,6 +10,7 @@ export const urls = {
 
 export const SCREENSHOT_PATHS = {
   parent: "screenshots/parent",
+  student: "screenshots/student"
 };
 export const filePaths = {
   ui: "parent-page-ui.png",
