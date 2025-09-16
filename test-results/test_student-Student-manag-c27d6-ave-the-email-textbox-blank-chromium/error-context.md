@@ -1,0 +1,463 @@
+# Page snapshot
+
+```yaml
+- img "logo school system"
+- navigation:
+  - list:
+    - link "team Phụ huynh":
+      - /url: /parent
+      - link "team Phụ huynh":
+        - /url: /parent
+        - listitem:
+          - img "team"
+          - text: Phụ huynh
+    - link "Học viên":
+      - /url: /student
+      - link "Học viên":
+        - /url: /student
+        - listitem:
+          - img
+          - text: Học viên
+    - link "Học viên học thử":
+      - /url: /trial-student
+      - link "Học viên học thử":
+        - /url: /trial-student
+        - listitem:
+          - img
+          - text: Học viên học thử
+    - link "Danh sách lớp":
+      - /url: /class
+      - link "Danh sách lớp":
+        - /url: /class
+        - listitem:
+          - img
+          - text: Danh sách lớp
+    - link "team Nhân sự":
+      - /url: /student
+      - listitem:
+        - img "team"
+        - text: Nhân sự
+        - img
+    - link "team":
+      - /url: /teacher
+      - img "team"
+    - link "team":
+      - /url: /class-supervision
+      - img "team"
+    - link "team":
+      - /url: /training-supervision
+      - img "team"
+    - link "team":
+      - /url: /business-staff
+      - img "team"
+    - link "team":
+      - /url: /collaborator
+      - img "team"
+    - link "TK liên kết":
+      - /url: /linked-account
+      - link "TK liên kết":
+        - /url: /linked-account
+        - listitem:
+          - img
+          - text: TK liên kết
+    - link "TK buổi dạy GV":
+      - /url: /teach-sess-stats
+      - link "TK buổi dạy GV":
+        - /url: /teach-sess-stats
+        - listitem:
+          - img
+          - text: TK buổi dạy GV
+    - link "book HDSD":
+      - /url: /user-guide
+      - link "book HDSD":
+        - /url: /user-guide
+        - listitem:
+          - img "book"
+          - text: HDSD
+- banner:
+  - img "menu"
+  - heading "Quản lý Học viên" [level=1]
+  - button "Thông báo ›":
+    - img
+    - text: Thông báo ›
+  - button "setting":
+    - img "setting"
+  - button "user":
+    - img "user"
+- button "reload Tải lại dữ liệu":
+  - img "reload"
+  - text: Tải lại dữ liệu
+- button "search Hiện tìm kiếm":
+  - img "search"
+  - text: Hiện tìm kiếm
+- button "plus-circle Thêm mới" [disabled]:
+  - img "plus-circle"
+  - text: Thêm mới
+- button "download Xuất Excel" [disabled]:
+  - img "download"
+  - text: Xuất Excel
+- button "check-circle Duyệt tất cả" [disabled]:
+  - img "check-circle"
+  - text: Duyệt tất cả
+- table:
+  - rowgroup:
+    - row "# Hành động Họ và tên Ngày sinh Email Lớp Khối lớp Học phí (VND) Chu kỳ đóng phí Ngày đóng gần nhất Kì đóng tiếp theo (Ngày) Phương thức thanh toán Ảnh Mã học viên Phụ huynh Chuyên viên kinh doanh Duyệt Thời gian tạo":
+      - columnheader "#"
+      - columnheader "Hành động"
+      - columnheader "Họ và tên"
+      - columnheader "Ngày sinh"
+      - columnheader "Email"
+      - columnheader "Lớp"
+      - columnheader "Khối lớp"
+      - columnheader "Học phí (VND)"
+      - columnheader "Chu kỳ đóng phí"
+      - columnheader "Ngày đóng gần nhất"
+      - columnheader "Kì đóng tiếp theo (Ngày)"
+      - columnheader "Phương thức thanh toán"
+      - columnheader "Ảnh"
+      - columnheader "Mã học viên"
+      - columnheader "Phụ huynh"
+      - columnheader "Chuyên viên kinh doanh"
+      - columnheader "Duyệt"
+      - columnheader "Thời gian tạo"
+      - cell
+- table:
+  - rowgroup:
+    - row "1 check close Nguyễn Thị L calendar Hãy nhập email hợp lệ! Lớp dạy lập trình thiếu nhi - VS0602 Increase Value Decrease Value Increase Value Decrease Value 1000000 1 tháng 01/09/2025 calendar close-circle 16/09/2025 Chọn phương thức upload Chọn hình ảnh Chưa có Chọn Phụ huynh Hãy chọn Chưa duyệt Chưa khởi tạo":
+      - cell "1"
+      - cell "check close":
+        - button "check":
+          - img "check"
+        - button "close":
+          - img "close"
+      - cell "Nguyễn Thị L":
+        - textbox: Nguyễn Thị L
+      - cell "calendar":
+        - textbox "Chọn ngày"
+        - img "calendar"
+      - cell "Hãy nhập email hợp lệ!":
+        - textbox
+        - text: Hãy nhập email hợp lệ!
+      - cell "Lớp dạy lập trình thiếu nhi - VS0602":
+        - combobox
+        - text: Lớp dạy lập trình thiếu nhi - VS0602
+      - cell "Increase Value Decrease Value":
+        - button "Increase Value":
+          - img "up"
+        - button "Decrease Value":
+          - img "down"
+        - spinbutton
+      - cell "Increase Value Decrease Value 1000000":
+        - button "Increase Value":
+          - img "up"
+        - button "Decrease Value":
+          - img "down"
+        - spinbutton: "1000000"
+      - cell "1 tháng":
+        - combobox
+        - text: 1 tháng
+      - cell "01/09/2025 calendar close-circle":
+        - textbox "Chọn ngày": 01/09/2025
+        - img "calendar"
+        - button "close-circle":
+          - img "close-circle"
+      - cell "16/09/2025"
+      - cell "Chọn phương thức":
+        - combobox
+        - text: Chọn phương thức
+      - cell "upload Chọn hình ảnh":
+        - button "upload Chọn hình ảnh":
+          - img "upload"
+          - text: Chọn hình ảnh
+      - cell "Chưa có"
+      - cell "Chọn Phụ huynh":
+        - combobox
+        - text: Chọn Phụ huynh
+      - cell "Hãy chọn":
+        - combobox
+        - text: Hãy chọn
+      - cell "Chưa duyệt"
+      - cell "Chưa khởi tạo"
+    - row "2 edit delete history tesst 01 25/06/2025 test@gmail.com Lớp phụ đạo văn - VS0601 1 1.000.000 ₫ 1 tháng 25/06/2025 25/07/2025 Chuyển khoản res eye Preview HV000013 Lê Hoàng Nam Phạm Thị Lan Chưa duyệt 25/06/2025":
+      - cell "2"
+      - cell "edit delete history":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+        - button "history":
+          - img "history"
+      - cell "tesst 01"
+      - cell "25/06/2025"
+      - cell "test@gmail.com"
+      - cell "Lớp phụ đạo văn - VS0601"
+      - cell "1"
+      - cell "1.000.000 ₫"
+      - cell "1 tháng"
+      - cell "25/06/2025"
+      - cell "25/07/2025"
+      - cell "Chuyển khoản"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000013"
+      - cell "Lê Hoàng Nam"
+      - cell "Phạm Thị Lan"
+      - cell "Chưa duyệt"
+      - cell "25/06/2025"
+    - row "3 edit delete history tesst 01 25/06/2025 test@gmail.com Lớp dạy lập trình thiếu nhi - VS0602 1 10.000.000 ₫ 3 tháng 25/06/2025 25/09/2025 Chuyển khoản res eye Preview HV000013 Lê Hoàng Nam Phạm Thị Lan Chưa duyệt 25/06/2025":
+      - cell "3"
+      - cell "edit delete history":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+        - button "history":
+          - img "history"
+      - cell "tesst 01"
+      - cell "25/06/2025"
+      - cell "test@gmail.com"
+      - cell "Lớp dạy lập trình thiếu nhi - VS0602"
+      - cell "1"
+      - cell "10.000.000 ₫"
+      - cell "3 tháng"
+      - cell "25/06/2025"
+      - cell "25/09/2025"
+      - cell "Chuyển khoản"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000013"
+      - cell "Lê Hoàng Nam"
+      - cell "Phạm Thị Lan"
+      - cell "Chưa duyệt"
+      - cell "25/06/2025"
+    - row "4 edit delete history tesst 01 25/06/2025 test@gmail.com Lớp dạy lập trình thiếu nhi - VS0602 1 10.000.000 ₫ 1 tháng 25/06/2025 25/07/2025 Chuyển khoản res eye Preview HV000013 Lê Hoàng Nam Phạm Thị Lan Chưa duyệt 25/06/2025":
+      - cell "4"
+      - cell "edit delete history":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+        - button "history":
+          - img "history"
+      - cell "tesst 01"
+      - cell "25/06/2025"
+      - cell "test@gmail.com"
+      - cell "Lớp dạy lập trình thiếu nhi - VS0602"
+      - cell "1"
+      - cell "10.000.000 ₫"
+      - cell "1 tháng"
+      - cell "25/06/2025"
+      - cell "25/07/2025"
+      - cell "Chuyển khoản"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000013"
+      - cell "Lê Hoàng Nam"
+      - cell "Phạm Thị Lan"
+      - cell "Chưa duyệt"
+      - cell "25/06/2025"
+    - row "5 edit delete history Nguyễn Ngọc 23/06/2025 ngoc@gmail.com Lớp phụ đạo văn - VS0601 5 5.000.000 ₫ 2 tháng 23/06/2025 23/08/2025 Chuyển khoản res eye Preview HV00027 Nguyễn Mỹ Linh Phạm Thị Lan Đã duyệt 23/06/2025":
+      - cell "5"
+      - cell "edit delete history":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+        - button "history":
+          - img "history"
+      - cell "Nguyễn Ngọc"
+      - cell "23/06/2025"
+      - cell "ngoc@gmail.com"
+      - cell "Lớp phụ đạo văn - VS0601"
+      - cell "5"
+      - cell "5.000.000 ₫"
+      - cell "2 tháng"
+      - cell "23/06/2025"
+      - cell "23/08/2025"
+      - cell "Chuyển khoản"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV00027"
+      - cell "Nguyễn Mỹ Linh"
+      - cell "Phạm Thị Lan"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+    - row "6 edit delete Nguyễn Ngọc 23/06/2025 ngoc@gmail.com Lớp toán nâng cao - VS0605 5 Chưa có Chưa có Chưa có Chưa có Chưa có res eye Preview HV00026 Chưa có Chưa có Đã duyệt 23/06/2025":
+      - cell "6"
+      - cell "edit delete":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+      - cell "Nguyễn Ngọc"
+      - cell "23/06/2025"
+      - cell "ngoc@gmail.com"
+      - cell "Lớp toán nâng cao - VS0605"
+      - cell "5"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV00026"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+    - row "7 edit delete history Nguyễn Ngọc 23/06/2025 ngoc@gmail.com Lớp toán - VS0600 5 5.000.000 ₫ 12 tháng 23/06/2025 23/06/2026 Tiền mặt res eye Preview HV0000010 Nguyễn Mỹ Linh Phạm Thị Lan Chưa duyệt 23/06/2025":
+      - cell "7"
+      - cell "edit delete history":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+        - button "history":
+          - img "history"
+      - cell "Nguyễn Ngọc"
+      - cell "23/06/2025"
+      - cell "ngoc@gmail.com"
+      - cell "Lớp toán - VS0600"
+      - cell "5"
+      - cell "5.000.000 ₫"
+      - cell "12 tháng"
+      - cell "23/06/2025"
+      - cell "23/06/2026"
+      - cell "Tiền mặt"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV0000010"
+      - cell "Nguyễn Mỹ Linh"
+      - cell "Phạm Thị Lan"
+      - cell "Chưa duyệt"
+      - cell "23/06/2025"
+    - row "8 edit delete Vũ Đức Anh 05/11/2011 ducanh.vu@studentmail.com Lớp phụ đạo văn - VS0601 6 Chưa có Chưa có Chưa có Chưa có Chưa có res eye Preview HV000006 Nguyễn Mỹ Linh Đỗ Minh Tâm Đã duyệt 23/06/2025":
+      - cell "8"
+      - cell "edit delete":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+      - cell "Vũ Đức Anh"
+      - cell "05/11/2011"
+      - cell "ducanh.vu@studentmail.com"
+      - cell "Lớp phụ đạo văn - VS0601"
+      - cell "6"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000006"
+      - cell "Nguyễn Mỹ Linh"
+      - cell "Đỗ Minh Tâm"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+    - row "9 edit delete Đỗ Thanh Thảo 14/08/2013 thao.dothanh@studentmail.com Lớp toán - VS0600 4 Chưa có Chưa có Chưa có Chưa có Chưa có res eye Preview HV000005 Lê Hoàng Nam Phạm Thị Lan Đã duyệt 23/06/2025":
+      - cell "9"
+      - cell "edit delete":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+      - cell "Đỗ Thanh Thảo"
+      - cell "14/08/2013"
+      - cell "thao.dothanh@studentmail.com"
+      - cell "Lớp toán - VS0600"
+      - cell "4"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000005"
+      - cell "Lê Hoàng Nam"
+      - cell "Phạm Thị Lan"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+    - row "10 edit delete Phạm Quốc Hưng 02/06/2009 hung.phamquoc@studentmail.com Lớp phụ đạo văn - VS0601 8 Chưa có Chưa có Chưa có Chưa có Chưa có res eye Preview HV000004 Công ty Cổ phần Công Nghệ E-Learn Phạm Thị Lan Đã duyệt 23/06/2025":
+      - cell "10"
+      - cell "edit delete":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+      - cell "Phạm Quốc Hưng"
+      - cell "02/06/2009"
+      - cell "hung.phamquoc@studentmail.com"
+      - cell "Lớp phụ đạo văn - VS0601"
+      - cell "8"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "Chưa có"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000004"
+      - cell "Công ty Cổ phần Công Nghệ E-Learn"
+      - cell "Phạm Thị Lan"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+    - row "11 edit delete Trần Bảo Trâm 18/12/2010 tram.tranbao@studentmail.com Lớp phụ đạo văn - VS0601 7 22.222 ₫ 2 tháng 23/06/2025 Chưa có Tiền mặt res eye Preview HV000003 Công ty TNHH Giáo Dục Việt Nguyễn Văn Hòa Đã duyệt 23/06/2025":
+      - cell "11"
+      - cell "edit delete":
+        - button "edit" [disabled]:
+          - img "edit"
+        - button "delete" [disabled]:
+          - img "delete"
+      - cell "Trần Bảo Trâm"
+      - cell "18/12/2010"
+      - cell "tram.tranbao@studentmail.com"
+      - cell "Lớp phụ đạo văn - VS0601"
+      - cell "7"
+      - cell "22.222 ₫"
+      - cell "2 tháng"
+      - cell "23/06/2025"
+      - cell "Chưa có"
+      - cell "Tiền mặt"
+      - cell "res eye Preview":
+        - img "res"
+        - img "eye"
+        - text: Preview
+      - cell "HV000003"
+      - cell "Công ty TNHH Giáo Dục Việt"
+      - cell "Nguyễn Văn Hòa"
+      - cell "Đã duyệt"
+      - cell "23/06/2025"
+- list:
+  - listitem "Previous Page":
+    - button "left" [disabled]:
+      - img "left"
+  - listitem "1"
+  - listitem "Next Page":
+    - button "right" [disabled]:
+      - img "right"
+  - listitem:
+    - combobox "Page Size"
+    - text: 30 / page
+- alert
+```
