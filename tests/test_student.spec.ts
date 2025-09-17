@@ -1,13 +1,15 @@
 import {
   clickElement,
   goToUrl,
+  selectDropdownOption,
   uploadImage,
 } from "../utils/actions/actionsUtils";
-import { notification, urls } from "../test_data/constants";
+import { filePaths, notification, urls } from "../test_data/constants";
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/fixtures";
 import { DATA_STUDENT } from "../test_data/studentData";
 import path from "path";
+import { clickDate } from "../utils/date/datePickerUtils";
 
 test.use({ storageState: "auth.json" });
 test.describe("Student management", async () => {
@@ -64,7 +66,7 @@ test.describe("Student management", async () => {
           await expect(page.getByText(notification.errorEmail)).toBeVisible();
         });
       });
-      test.describe.only("invalid Email", async () => {
+      test.describe("Invalid Email", async () => {
         const invalidEmail = [
           {
             case: "lack @",
@@ -82,7 +84,10 @@ test.describe("Student management", async () => {
             case: "invalid character",
             data: DATA_STUDENT.student.invalid.InvalidEmail_InvalidChars,
           },
-          { case: "lack .com", data: DATA_STUDENT.student.invalid.InvalidEmail_NoTLD },
+          {
+            case: "lack .com",
+            data: DATA_STUDENT.student.invalid.InvalidEmail_NoTLD,
+          },
         ];
         for (const item of invalidEmail) {
           test(`Enter an ${item.case} in the email field`, async ({
@@ -121,6 +126,55 @@ test.describe("Student management", async () => {
           filePath
         );
         await expect(page.getByText(notification.success)).toBeVisible();
+      });
+      test("Add student with full information", async ({
+        page,
+        studentPage,
+      }) => {
+        const data = DATA_STUDENT.student.studentFull;
+        const filePath = path.resolve(__dirname, data.filePaths);
+        await expect(studentPage.bodyRows.first()).toBeVisible();
+        await clickElement(studentPage.addButton);
+        await studentPage.fullName.fill(data.fullName);
+        await clickDate(studentPage.page, studentPage.dob, data.dob);
+        await studentPage.email.fill(data.email);
+        await selectDropdownOption(
+          studentPage.classRoom,
+          data.class,
+          studentPage.page
+        );
+        await studentPage.gradeLevel.fill(data.gradeLevel),
+          await studentPage.fee.fill(data.fee);
+        await selectDropdownOption(
+          studentPage.feePaymentCycle,
+          data.feePaymentCycle,
+          studentPage.page
+        );
+        await clickDate(
+          studentPage.page,
+          studentPage.paymentDate,
+          data.paymentDate
+        );
+        await selectDropdownOption(
+          studentPage.paymentMethod,
+          data.paymentMethod,
+          studentPage.page
+        );
+        await studentPage.chooseImage(filePath);
+        await selectDropdownOption(
+          studentPage.parent,
+          data.parent,
+          studentPage.page
+        );
+        await selectDropdownOption(
+          studentPage.businessStaff,
+          data.bussinessStaff,
+          studentPage.page
+        );
+        await clickElement(studentPage.acceptButton);
+        await expect(page.getByText(notification.success)).toBeVisible({
+          timeout: 3000,
+        });
       });
     });
   });
