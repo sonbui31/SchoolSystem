@@ -7,7 +7,7 @@ export async function verifyItemTable(allRows: Locator) {
   }
 }
 
-export function getRowElements(rows, index: number) {
+export function getRowElements(rows: Locator, index: number) {
   const row = rows.nth(index);
   return {
     row,
@@ -18,7 +18,7 @@ export function getRowElements(rows, index: number) {
 
 // Helper: assert trạng thái enable/disable theo duyệt
 export async function assertRowActions(
-  row,
+  row: Locator,
   expectedApproved: boolean,
   index?: number
 ) {

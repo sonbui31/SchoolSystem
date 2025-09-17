@@ -40,10 +40,10 @@ export class StudentPage extends BasePage {
   async addStudent(
     fullName: string,
     email: string,
-    classOption: string | null,
+    classOption: string,
     fee: string,
-    feePaymentCycleOption: string | null,
-    paymentDate: string | null,
+    feePaymentCycleOption: string,
+    paymentDate: string,
     filePaths?: string
   ) {
     await clickElement(this.addButton);

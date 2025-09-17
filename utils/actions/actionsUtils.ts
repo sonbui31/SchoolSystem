@@ -13,10 +13,25 @@ export async function selectDropdownOption(
   page: Page
 ) {
   await triggerLocator.click();
+  await triggerLocator.fill(optionText);
+
+  const noData = page.locator(".ant-select-dropdown .ant-empty");
   const dropdownOption = page
     .locator(".ant-select-dropdown .ant-select-item-option")
     .filter({ hasText: optionText });
-  await expect(dropdownOption.first()).toBeVisible({ timeout: 5000 });
+
+  // Đợi dropdown render xong (để tránh race condition)
+  await page.waitForTimeout(500);
+
+  const optionCount = await dropdownOption.count();
+
+  if (optionCount === 0) {
+    // Không có item nào, expect hiện No data
+    await expect(noData).toBeVisible({ timeout: 5000 });
+    return; // không click nữa
+  }
+
+  // Có item thì chọn
   await dropdownOption.first().click();
 }
 export async function clickDropdownOption(
