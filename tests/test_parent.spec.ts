@@ -403,7 +403,7 @@ test.describe("Parent Management Functions", () => {
       });
     }
 
-    test.only("Search parent by create time", async ({ page, parentPage }) => {
+    test("Search parent by create time", async ({ page, parentPage }) => {
       const { start, end } = TEST_DATA.parent.search.dateRange;
       await openSearchAndClose(page, parentPage, async () => {
         await parentPage.searchTime(start, end);

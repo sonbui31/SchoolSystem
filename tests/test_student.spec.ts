@@ -21,16 +21,16 @@ test.describe("Student management", async () => {
     test.describe("Add student function", async () => {
       test.describe("Required input fields", async () => {
         const blankInput = [
-          { case: "full name", data: DATA_STUDENT.student.blank.FullName },
-          { case: "class", data: DATA_STUDENT.student.blank.Class },
-          { case: "fee", data: DATA_STUDENT.student.blank.Fee },
+          { case: "full name", data: DATA_STUDENT.blank.FullName },
+          { case: "class", data: DATA_STUDENT.blank.Class },
+          { case: "fee", data: DATA_STUDENT.blank.Fee },
           {
             case: "fee payment cycle",
-            data: DATA_STUDENT.student.blank.feePaymentCycle,
+            data: DATA_STUDENT.blank.feePaymentCycle,
           },
           {
             case: "payment date",
-            data: DATA_STUDENT.student.blank.paymentDate,
+            data: DATA_STUDENT.blank.paymentDate,
           },
         ];
         for (const item of blankInput) {
@@ -54,7 +54,7 @@ test.describe("Student management", async () => {
           page,
           studentPage,
         }) => {
-          const student3 = DATA_STUDENT.student.blank.Email;
+          const student3 = DATA_STUDENT.blank.Email;
           await studentPage.addStudent(
             student3.fullName,
             student3.email,
@@ -66,27 +66,28 @@ test.describe("Student management", async () => {
           await expect(page.getByText(notification.errorEmail)).toBeVisible();
         });
       });
+
       test.describe("Invalid Email", async () => {
         const invalidEmail = [
           {
             case: "lack @",
-            data: DATA_STUDENT.student.invalid.InvalidEmail_MissingAt,
+            data: DATA_STUDENT.invalidEmail.missingAt,
           },
           {
             case: "lack domain",
-            data: DATA_STUDENT.student.invalid.InvalidEmail_MissingDomain,
+            data: DATA_STUDENT.invalidEmail.missingDomain,
           },
           {
             case: "lack username",
-            data: DATA_STUDENT.student.invalid.InvalidEmail_MissingUsername,
+            data: DATA_STUDENT.invalidEmail.missingUsername,
           },
           {
             case: "invalid character",
-            data: DATA_STUDENT.student.invalid.InvalidEmail_InvalidChars,
+            data: DATA_STUDENT.invalidEmail.invalidChars,
           },
           {
             case: "lack .com",
-            data: DATA_STUDENT.student.invalid.InvalidEmail_NoTLD,
+            data: DATA_STUDENT.invalidEmail.noTLD,
           },
         ];
         for (const item of invalidEmail) {
@@ -110,11 +111,56 @@ test.describe("Student management", async () => {
         }
       });
 
+      test.describe
+        .only("Space at both ends of the input require textbox", async () => {
+        const space = [
+          {
+            case: "full name",
+            data: DATA_STUDENT.space.fullName,
+          },
+          {
+            case: "email",
+            data: DATA_STUDENT.space.email,
+          },
+          {
+            case: "class",
+            data: DATA_STUDENT.space.class,
+          },
+          {
+            case: "fee",
+            data: DATA_STUDENT.space.fee,
+          },
+          {
+            case: "feePaymentCycle",
+            data: DATA_STUDENT.space.feePaymentCycle,
+          },
+        ];
+        for (const item of space) {
+          test(`Space at both ends of the input ${item.case} textbox`, async ({
+            page,
+            studentPage,
+          }) => {
+            const data = item.data;
+            await studentPage.addStudent(
+              data.fullName,
+              data.email,
+              data.class,
+              data.fee,
+              data.feePaymentCycle,
+              data.paymentDate
+            );
+            await expect(page.getByText(notification.success)).toBeVisible({
+              timeout: 5000,
+            });
+          });
+        }
+      });
+
       test("Add student success with picture", async ({
         page,
         studentPage,
       }) => {
-        const student2 = DATA_STUDENT.student.student2;
+        const student2 = DATA_STUDENT.studentWithPicture;
         const filePath = path.resolve(__dirname, student2.filePaths);
         await studentPage.addStudent(
           student2.fullName,
@@ -127,11 +173,12 @@ test.describe("Student management", async () => {
         );
         await expect(page.getByText(notification.success)).toBeVisible();
       });
+      
       test("Add student with full information", async ({
         page,
         studentPage,
       }) => {
-        const data = DATA_STUDENT.student.studentFull;
+        const data = DATA_STUDENT.studentFullInfor;
         const filePath = path.resolve(__dirname, data.filePaths);
         await expect(studentPage.bodyRows.first()).toBeVisible();
         await clickElement(studentPage.addButton);

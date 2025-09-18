@@ -19,10 +19,7 @@ export async function selectDropdownOption(
   const dropdownOption = page
     .locator(".ant-select-dropdown .ant-select-item-option")
     .filter({ hasText: optionText });
-
-  // Đợi dropdown render xong (để tránh race condition)
   await page.waitForTimeout(500);
-
   const optionCount = await dropdownOption.count();
 
   if (optionCount === 0) {
@@ -30,17 +27,15 @@ export async function selectDropdownOption(
     await expect(noData).toBeVisible({ timeout: 5000 });
     return; // không click nữa
   }
-
-  // Có item thì chọn
   await dropdownOption.first().click();
 }
-export async function clickDropdownOption(
-  comboLocator: Locator,
-  optionText: string,
-  page: Page
-) {
-  await selectDropdownOption(comboLocator, optionText, page);
-}
+// export async function clickDropdownOption(
+//   comboLocator: Locator,
+//   optionText: string,
+//   page: Page
+// ) {
+//   await selectDropdownOption(comboLocator, optionText, page);
+// }
 
 export async function uploadImage(fileInput: Locator, filePath: string) {
   const absolutePath = path.resolve(filePath);
