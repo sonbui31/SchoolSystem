@@ -130,11 +130,7 @@ export const TEST_DATA = {
       approved: "Đã duyệt",
       notApproved: "Chưa duyệt",
     },
-    pagination: {
-      options: [10, 20, 30, 50, 100],
-    },
-    excel: {
-      parents: "downloads/Quản_lý_phụ_huynh.xlsx",
-    },
+    
+    
   },
 };

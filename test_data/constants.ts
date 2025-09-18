@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test";
 import { error } from "console";
 import path from "path";
+import { selectPaginationOption } from "../utils/actions/paginationUtils";
 
 export const urls = {
   login: "https://classroom-management.vfast.pro",
@@ -57,4 +58,12 @@ export const notification = {
   errorEmail: "Hãy nhập email hợp lệ!",
   updatedSuccessfully: "Cập nhật thành công",
   deleteSuccess: "Xóa bản ghi thành công",
+};
+
+export const pagination = {
+  options: [10, 20, 30, 50, 100],
+};
+export const excel = {
+  parents: "downloads/Quản_lý_phụ_huynh.xlsx",
+  student: "downloads/Quản_học_sinh.xlsx",
 };

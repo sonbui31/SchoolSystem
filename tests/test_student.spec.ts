@@ -2,14 +2,19 @@ import {
   clickElement,
   goToUrl,
   selectDropdownOption,
-  uploadImage,
 } from "../utils/actions/actionsUtils";
-import { filePaths, notification, urls } from "../test_data/constants";
+import {
+  notification,
+  pagination,
+  TIMEOUTS,
+  urls,
+} from "../test_data/constants";
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/fixtures";
 import { DATA_STUDENT } from "../test_data/studentData";
 import path from "path";
 import { clickDate } from "../utils/date/datePickerUtils";
+import { expectOnlyValidChars } from "../utils/actions/inputActionsUtils";
 
 test.use({ storageState: "auth.json" });
 test.describe("Student management", async () => {
@@ -111,8 +116,7 @@ test.describe("Student management", async () => {
         }
       });
 
-      test.describe
-        .only("Space at both ends of the input require textbox", async () => {
+      test.describe("Space at both ends of the input require textbox", async () => {
         const space = [
           {
             case: "full name",
@@ -173,7 +177,7 @@ test.describe("Student management", async () => {
         );
         await expect(page.getByText(notification.success)).toBeVisible();
       });
-      
+
       test("Add student with full information", async ({
         page,
         studentPage,
@@ -223,6 +227,83 @@ test.describe("Student management", async () => {
           timeout: 3000,
         });
       });
+
+      test("Add students with special characters in the number input box", async ({
+        page,
+        studentPage,
+      }) => {
+        const data = DATA_STUDENT.studentSpecialCharacters;
+        const filePath = path.resolve(__dirname, data.filePaths);
+        await expect(studentPage.bodyRows.first()).toBeVisible();
+        await clickElement(studentPage.addButton);
+        await studentPage.fullName.fill(data.fullName);
+        await clickDate(studentPage.page, studentPage.dob, data.dob);
+        await studentPage.email.fill(data.email);
+        await selectDropdownOption(
+          studentPage.classRoom,
+          data.class,
+          studentPage.page
+        );
+        await studentPage.gradeLevel.fill(data.gradeLevel);
+        await studentPage.fee.fill(data.fee);
+        await selectDropdownOption(
+          studentPage.feePaymentCycle,
+          data.feePaymentCycle,
+          studentPage.page
+        );
+        await clickDate(
+          studentPage.page,
+          studentPage.paymentDate,
+          data.paymentDate
+        );
+        await selectDropdownOption(
+          studentPage.paymentMethod,
+          data.paymentMethod,
+          studentPage.page
+        );
+        await studentPage.chooseImage(filePath);
+        await selectDropdownOption(
+          studentPage.parent,
+          data.parent,
+          studentPage.page
+        );
+        await selectDropdownOption(
+          studentPage.businessStaff,
+          data.bussinessStaff,
+          studentPage.page
+        );
+        await expectOnlyValidChars(
+          page,
+          studentPage.gradeLevel,
+          data.gradeLevel
+        );
+        await expectOnlyValidChars(page, studentPage.fee, data.fee);
+        await clickElement(studentPage.acceptButton);
+        await expect(page.getByText(notification.success)).toBeVisible({
+          timeout: 3000,
+        });
+      });
+    });
+
+    test.describe("Student Page Pagination function", () => {
+      const paginationOptions = pagination.options;
+      paginationOptions.forEach((option) => {
+        test(`Display ${option} rows per page`, async ({ studentPage }) => {
+          await studentPage.setPagination(option.toString());
+          await studentPage.page.waitForTimeout(TIMEOUTS.short);
+          await studentPage.scrollTableToBottom();
+          await studentPage.page.waitForTimeout(TIMEOUTS.short);
+          await studentPage.checkRows(option);
+        });
+      });
+    });
+
+    test("Reload data table function", async ({ page, studentPage }) => {
+      await clickElement(studentPage.reloadButton);
+      const loading = page.locator(".ant-spin");
+      await expect(loading).toBeVisible();
+      await expect(loading).toBeHidden();
+      await expect(studentPage.bodyRows.first()).toBeVisible();
     });
   });
 });

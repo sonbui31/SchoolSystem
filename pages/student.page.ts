@@ -5,8 +5,12 @@ import {
   uploadImage,
   selectDropdownOption,
 } from "../utils/actions/actionsUtils";
-import { clickDate } from "../utils/date/datePickerUtils";
-import path from "path";
+import { clickCreateTime, clickDate } from "../utils/date/datePickerUtils";
+import {
+  selectPaginationOption,
+  verifyRowsPerPage,
+} from "../utils/actions/paginationUtils";
+import { scrollToBottom } from "../utils/actions/scrollUtils";
 
 export class StudentPage extends BasePage {
   // Form
@@ -40,6 +44,18 @@ export class StudentPage extends BasePage {
     this.fileInput = page.locator("#images");
     this.parent = page.locator("#parent");
     this.businessStaff = page.locator("#business_staff");
+  }
+  async setPagination(value: string) {
+    await selectPaginationOption(this.pagination, this.dropDown, value);
+  }
+  async checkRows(expected: number) {
+    await verifyRowsPerPage(this.bodyRows, expected);
+  }
+  // async searchTime(start: string, end: string) {
+  //   await clickCreateTime(this.page, this.createTimeInput, start, end);
+  // }
+  async scrollTableToBottom() {
+    await scrollToBottom(this.page, this.tableBody);
   }
   async chooseImage(filePath?: string) {
     if (filePath) {

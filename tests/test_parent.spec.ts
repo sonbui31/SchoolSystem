@@ -1,6 +1,8 @@
 import {
+  excel,
   filePaths,
   notification,
+  pagination,
   SCREENSHOT_PATHS,
 } from "./../test_data/constants";
 import { Page } from "@playwright/test";
@@ -300,7 +302,7 @@ test.describe("Parent Management Functions", () => {
   });
   test.describe("Export file Function", () => {
     test("Export and Verify Excel file", async ({ page, parentPage }) => {
-      const filePath = TEST_DATA.parent.excel.parents;
+      const filePath = excel.parents;
       await expect(parentPage.bodyRows.first()).toBeVisible();
       const uiRowCount = await parentPage.bodyRows.count();
       // console.log(`Số lượng dòng UI thực tế: ${uiRowCount}`);
@@ -432,7 +434,7 @@ test.describe("Parent Management Functions", () => {
   });
 
   test.describe("Parent Page Pagination function", () => {
-    const paginationOptions = TEST_DATA.parent.pagination.options;
+    const paginationOptions = pagination.options;
     paginationOptions.forEach((option) => {
       test(`Display ${option} rows per page`, async ({ parentPage }) => {
         await parentPage.setPagination(option.toString());
