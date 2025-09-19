@@ -1,5 +1,19 @@
+export const studentFullInfor = {
+  fullName: "Nguyễn Trà Mi",
+  dob: "2018-06-11",
+  email: "mynguyen@example.com",
+  class: "Lớp toán nâng cao",
+  gradeLevel: "6",
+  fee: "1600000",
+  feePaymentCycle: "1 tháng",
+  paymentDate: "2025-09-08",
+  paymentMethod: "MoMo",
+  filePaths: "../assets/student.jpg",
+  parent: "Nguyễn Mỹ Linh",
+  bussinessStaff: "Phạm Thị Lan",
+};
 export const DATA_STUDENT = {
-  blank: {
+  blankRequireInput: {
     FullName: {
       fullName: "",
       email: "long.bui@example.com",
@@ -48,6 +62,14 @@ export const DATA_STUDENT = {
       feePaymentCycle: "1 tháng",
       paymentDate: "",
     },
+  },
+  blankNotRequire: {
+    dob: { ...studentFullInfor, dob: "" },
+    gradeLevel: { ...studentFullInfor, gradeLevel: "" },
+    paymentMethod: { ...studentFullInfor, paymentMethod: "" },
+    filePaths: { ...studentFullInfor, filePaths: "" },
+    parent: { ...studentFullInfor, parent: "" },
+    bussinessStaff: { ...studentFullInfor, bussinessStaff: "" },
   },
 
   invalidEmail: {
@@ -135,29 +157,6 @@ export const DATA_STUDENT = {
     },
   },
 
-  studentWithPicture: {
-    fullName: "Phan Nhật Tân",
-    email: "tan.phan@example.com",
-    class: "Lớp toán nâng cao",
-    fee: "1600000",
-    feePaymentCycle: "1 tháng",
-    paymentDate: "2027-09-18",
-    filePaths: "../assets/student.jpg",
-  },
-  studentFullInfor: {
-    fullName: "Nguyễn Trà Mi",
-    dob: "2018-06-11",
-    email: "mynguyen@example.com",
-    class: "Lớp toán nâng cao",
-    gradeLevel: "6",
-    fee: "1600000",
-    feePaymentCycle: "1 tháng",
-    paymentDate: "2025-09-08",
-    paymentMethod: "MoMo",
-    filePaths: "../assets/student.jpg",
-    parent: "Nguyễn Mỹ Linh",
-    bussinessStaff: "Phạm Thị Lan",
-  },
   studentSpecialCharacters: {
     fullName: "Nguyễn Trà Mi",
     dob: "2018-06-11",
@@ -171,5 +170,28 @@ export const DATA_STUDENT = {
     filePaths: "../assets/student.jpg",
     parent: "Nguyễn Mỹ Linh",
     bussinessStaff: "Phạm Thị Lan",
+  },
+  studentWithPicture: {
+    fullName: "Phan Nhật Tân",
+    email: "tan.phan@example.com",
+    class: "Lớp toán nâng cao",
+    fee: "1600000",
+    feePaymentCycle: "1 tháng",
+    paymentDate: "2027-09-18",
+    filePaths: "../assets/student.jpg",
+  },
+  aLotOfPicture: {
+    fullName: "Nguyễn Trà Mi",
+    dob: "2018-06-11",
+    email: "mynguyen@example.com",
+    class: "Lớp toán nâng cao",
+    fee: "1600000!",
+    feePaymentCycle: "1 tháng",
+    paymentDate: "2025-09-08",
+    filePaths: {
+      student1: "../assets/student.jpg",
+      student2: "../assets/student2.jpg",
+      student3: "../assets/student3.jpg",
+    },
   },
 };

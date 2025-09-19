@@ -11,6 +11,7 @@ import {
   verifyRowsPerPage,
 } from "../utils/actions/paginationUtils";
 import { scrollToBottom } from "../utils/actions/scrollUtils";
+import path from "path";
 
 export class StudentPage extends BasePage {
   // Form
@@ -27,6 +28,9 @@ export class StudentPage extends BasePage {
   readonly paymentMethod: Locator;
   readonly parent: Locator;
   readonly businessStaff: Locator;
+
+  //search
+  readonly createTimeInput: Locator;
   constructor(page: Page) {
     super(page);
     this.fullName = page.locator("#full_name");
@@ -44,6 +48,7 @@ export class StudentPage extends BasePage {
     this.fileInput = page.locator("#images");
     this.parent = page.locator("#parent");
     this.businessStaff = page.locator("#business_staff");
+    this.createTimeInput = page.getByRole("textbox", { name: "Thời gian tạo" });
   }
   async setPagination(value: string) {
     await selectPaginationOption(this.pagination, this.dropDown, value);
@@ -51,9 +56,9 @@ export class StudentPage extends BasePage {
   async checkRows(expected: number) {
     await verifyRowsPerPage(this.bodyRows, expected);
   }
-  // async searchTime(start: string, end: string) {
-  //   await clickCreateTime(this.page, this.createTimeInput, start, end);
-  // }
+  async searchTime(start: string, end: string) {
+    await clickCreateTime(this.page, this.createTimeInput, start, end);
+  }
   async scrollTableToBottom() {
     await scrollToBottom(this.page, this.tableBody);
   }
@@ -97,5 +102,43 @@ export class StudentPage extends BasePage {
 
     await clickElement(this.acceptButton);
     await expect(this.bodyRows.first()).toBeVisible();
+  }
+  async fillStudentForm(
+    fullName: string,
+    dob: string,
+    email: string,
+    classOption: string,
+    gradeLevel: string,
+    fee: string,
+    feePaymentCycleOption: string,
+    paymentDate: string,
+    paymentMethod: string,
+    filePaths: string,
+    parent: string,
+    businessStaff: string
+  ) {
+    await this.fullName.fill(fullName);
+    if (dob) await clickDate(this.page, this.dob, dob);
+    await this.email.fill(email);
+    await selectDropdownOption(this.classRoom, classOption, this.page);
+    if (gradeLevel) await this.gradeLevel.fill(gradeLevel);
+    await this.fee.fill(fee);
+    await selectDropdownOption(
+      this.feePaymentCycle,
+      feePaymentCycleOption,
+      this.page
+    );
+    await clickDate(this.page, this.paymentDate, paymentDate);
+    if (paymentMethod)
+      await selectDropdownOption(this.paymentMethod, paymentMethod, this.page);
+
+    if (filePaths) {
+      const absolutePath = path.resolve(__dirname, filePaths);
+      await this.chooseImage(absolutePath);
+    }
+
+    if (parent) await selectDropdownOption(this.parent, parent, this.page);
+    if (businessStaff)
+      await selectDropdownOption(this.businessStaff, businessStaff, this.page);
   }
 }
