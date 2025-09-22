@@ -2,7 +2,7 @@ import path from "path";
 import { test, expect, username, password } from "../fixtures/fixtures.ts";
 import { clickElement, goToUrl } from "../utils/actions/actionsUtils.ts";
 import { fillField } from "../utils/actions/inputActionsUtils.ts";
-import { urls } from "../test_data/constants.ts";
+import { urls } from "../testData/constants.ts";
 
 test.describe("Functions on login page", () => {
   test.beforeEach(async ({ loginPage }) => {

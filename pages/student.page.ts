@@ -1,17 +1,18 @@
 import { expect, Locator, Page } from "@playwright/test";
+import path from "path";
 import { BasePage } from "../basePage/basePage";
 import {
   clickElement,
-  uploadImage,
   selectDropdownOption,
+  uploadImage,
 } from "../utils/actions/actionsUtils";
-import { clickCreateTime, clickDate } from "../utils/date/datePickerUtils";
+import { clearInputField } from "../utils/actions/inputActionsUtils";
 import {
   selectPaginationOption,
   verifyRowsPerPage,
 } from "../utils/actions/paginationUtils";
 import { scrollToBottom } from "../utils/actions/scrollUtils";
-import path from "path";
+import { clickCreateTime, clickDate } from "../utils/date/datePickerUtils";
 
 export class StudentPage extends BasePage {
   // Form
@@ -140,5 +141,90 @@ export class StudentPage extends BasePage {
     if (parent) await selectDropdownOption(this.parent, parent, this.page);
     if (businessStaff)
       await selectDropdownOption(this.businessStaff, businessStaff, this.page);
+  }
+
+  async editStudentForm(
+    identifier: string,
+    options: {
+      fullName?: string;
+      dob?: string;
+      email?: string;
+      classOption?: string;
+      gradeLevel?: string;
+      fee?: string;
+      feePaymentCycleOption?: string;
+      paymentDate?: string;
+      paymentMethod?: string;
+      filePaths?: string;
+      parent?: string;
+      businessStaff?: string;
+    }
+  ) {
+    const fieldConfigs = [
+      { locator: this.fullName, value: options.fullName, type: "fill" },
+      { locator: this.dob, value: options.dob, type: "clickDate" },
+      { locator: this.email, value: options.email, type: "fill" },
+      {
+        locator: this.classRoom,
+        value: options.classOption,
+        type: "selectDropdown",
+      },
+      { locator: this.gradeLevel, value: options.gradeLevel, type: "fill" },
+      { locator: this.fee, value: options.fee, type: "fill" },
+      {
+        locator: this.feePaymentCycle,
+        value: options.feePaymentCycleOption,
+        type: "selectDropdown",
+      },
+      {
+        locator: this.paymentDate,
+        value: options.paymentDate,
+        type: "clickDate",
+      },
+      {
+        locator: this.paymentMethod,
+        value: options.paymentMethod,
+        type: "selectDropdown",
+      },
+      { locator: this.parent, value: options.parent, type: "selectDropdown" },
+      {
+        locator: this.businessStaff,
+        value: options.businessStaff,
+        type: "selectDropdown",
+      },
+    ] as const;
+
+    // 1. Tìm row cần edit
+    const row = this.bodyRows.filter({ hasText: identifier }).first();
+    await expect(row).toBeVisible();
+
+    // 2. Click nút edit
+    const editButton = row.getByRole("button", { name: "edit" });
+    await clickElement(editButton);
+
+    // 3. Điền lại dữ liệu mới
+    for (const { locator, value, type } of fieldConfigs) {
+      if (!value) continue;
+
+      switch (type) {
+        case "fill":
+          await clearInputField(locator);
+          await locator.fill(value);
+          break;
+        case "clickDate":
+          await clickDate(this.page, locator, value);
+          break;
+        case "selectDropdown":
+          await selectDropdownOption(locator, value, this.page);
+          break;
+      }
+    }
+
+    // 4. Upload file nếu có
+    if (options.filePaths) {
+      const absolutePath = path.resolve(__dirname, options.filePaths);
+      await this.chooseImage(absolutePath);
+    }
+    await clickElement(this.acceptButton);
   }
 }

@@ -1,7 +1,7 @@
 import { Page, Locator } from "@playwright/test";
 import { clickElement } from "../utils/actions/actionsUtils";
 import { fillField } from "../utils/actions/inputActionsUtils";
-import { urls } from "../test_data/constants";
+import { urls } from "../testData/constants";
 import { time } from "console";
 export class LoginPage {
   page: Page;

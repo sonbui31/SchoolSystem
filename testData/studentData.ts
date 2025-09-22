@@ -12,6 +12,14 @@ export const studentFullInfor = {
   parent: "Nguyễn Mỹ Linh",
   bussinessStaff: "Phạm Thị Lan",
 };
+export const requireInput = {
+  fullName: " Phạm Gia Huy ",
+  email: "huypham@example.com",
+  class: "Lớp toán nâng cao",
+  fee: "1800000",
+  feePaymentCycle: "1 tháng",
+  paymentDate: "2025-09-15",
+};
 export const DATA_STUDENT = {
   blankRequireInput: {
     FullName: {
@@ -192,6 +200,23 @@ export const DATA_STUDENT = {
       student1: "../assets/student.jpg",
       student2: "../assets/student2.jpg",
       student3: "../assets/student3.jpg",
+    },
+  },
+  editDataRequire: {
+    fullName: { ...requireInput, fullName: "Bùi Ngọc Sơn" },
+    email: { ...requireInput, email: "abc@gmail.com" },
+    class: { ...requireInput, class: "Lớp tiếng anh dễ" },
+    fee: { ...requireInput, fee: "1000000000" },
+    feePaymentCycle: { ...requireInput, feePaymentCycle: "12 tháng" },
+    paymentDate: { ...requireInput, paymentDate: "2025-09-21" },
+    all: {
+      ...requireInput,
+      fullName: "Bế Thanh Tùng",
+      email: "tungbe@gmail.com",
+      class: "Lớp phụ đạo văn",
+      fee: "5000000",
+      feePaymentCycle: "6 tháng",
+      paymentDate: "2025-09-29",
     },
   },
 };

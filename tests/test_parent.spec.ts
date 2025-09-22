@@ -1,30 +1,30 @@
-import {
-  excel,
-  filePaths,
-  notification,
-  pagination,
-  SCREENSHOT_PATHS,
-} from "./../test_data/constants";
 import { Page } from "@playwright/test";
-import { test, expect } from "../fixtures/fixtures";
-import { downloadExcel, verifyExcelDownload } from "../utils/excelUtils";
-import { clearInputField, fillField } from "../utils/actions/inputActionsUtils";
+import { isWithinInterval, parse } from "date-fns";
+import fs from "fs";
+import { expect, test } from "../fixtures/fixtures";
+import {
+  takeScreenshot,
+  TIMEOUTS,
+  urls,
+  waitAndScreenshot,
+} from "../testData/constants";
+import { TEST_DATA } from "../testData/parentData";
 import { clickElement, goToUrl } from "../utils/actions/actionsUtils";
+import { clearInputField, fillField } from "../utils/actions/inputActionsUtils";
 import {
   assertRowActions,
   getRowElements,
   verifyItemTable,
   verifySearchResult,
 } from "../utils/actions/verifyItemRows";
-import { TEST_DATA } from "../test_data/parentData";
+import { downloadExcel, verifyExcelDownload } from "../utils/excelUtils";
 import {
-  takeScreenshot,
-  TIMEOUTS,
-  urls,
-  waitAndScreenshot,
-} from "../test_data/constants";
-import { isWithinInterval, parse } from "date-fns";
-import fs from "fs";
+  excel,
+  filePaths,
+  notification,
+  pagination,
+  SCREENSHOT_PATHS,
+} from "./../testData/constants";
 
 test.use({ storageState: "auth.json" });
 
