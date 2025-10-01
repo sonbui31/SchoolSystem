@@ -20,8 +20,6 @@ export async function selectDropdownOption(
   );
   await dropdown.waitFor({ state: "visible", timeout: 5000 });
 
-  // const noData = page.locator(".ant-select-dropdown .ant-empty");
-
   const dropdownOption = page
     .locator(".ant-select-dropdown .ant-select-item-option")
     .filter({ hasText: optionText });
@@ -33,7 +31,7 @@ export async function selectDropdownOption(
       .last()
       .scrollIntoViewIfNeeded();
   }
-
+  // const noData = page.locator(".ant-select-dropdown .ant-empty");
   // const noData = dropdown.getByText("No data");
   // const optionCount = await dropdownOption.count();
   // if (optionCount === 0) {
@@ -48,3 +46,12 @@ export async function uploadImage(fileInput: Locator, filePath: string) {
   const absolutePath = path.resolve(filePath);
   await fileInput.setInputFiles(absolutePath);
 }
+export async function deleteElement(page:Page, rowName: string) {
+  const deleteButton = page
+    .getByRole("row", { name: rowName })
+    .getByRole("button")
+    .nth(1);
+  await clickElement(deleteButton);
+
+}
+  

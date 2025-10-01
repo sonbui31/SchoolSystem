@@ -32,6 +32,8 @@ export class StudentPage extends BasePage {
 
   //search
   readonly createTimeInput: Locator;
+
+  readonly historyBtn: Locator;
   constructor(page: Page) {
     super(page);
     this.fullName = page.locator("#full_name");
@@ -50,6 +52,8 @@ export class StudentPage extends BasePage {
     this.parent = page.locator("#parent");
     this.businessStaff = page.locator("#business_staff");
     this.createTimeInput = page.getByRole("textbox", { name: "Thời gian tạo" });
+
+    this.historyBtn = page.getByRole("button", { name: "history" });
   }
   async setPagination(value: string) {
     await selectPaginationOption(this.pagination, this.dropDown, value);
@@ -68,6 +72,13 @@ export class StudentPage extends BasePage {
       await clickElement(this.choosePictureBtn);
       await uploadImage(this.fileInput, filePath);
     }
+  }
+  async clickHistoryButton(name: string) {
+    const histotyBtn = this.page
+      .getByRole("row", { name })
+      .getByRole("button")
+      .nth(2);
+    await clickElement(histotyBtn);
   }
 
   async addStudent(

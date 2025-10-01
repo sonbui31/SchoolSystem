@@ -10,6 +10,7 @@ import {
 import { DATA_STUDENT, studentFullInfor } from "../testData/studentData";
 import {
   clickElement,
+  deleteElement,
   goToUrl,
   selectDropdownOption,
 } from "../utils/actions/actionsUtils";
@@ -345,7 +346,7 @@ test.describe("Student management", async () => {
         });
       });
     });
-    test.describe.only("Edit student function", () => {
+    test.describe("Edit student function", () => {
       test.describe("Edit student with input require", () => {
         type EditRequireKey =
           | keyof typeof DATA_STUDENT.editDataRequire.requirInput
@@ -406,6 +407,20 @@ test.describe("Student management", async () => {
       });
     });
 
+    test.describe("Delete button function", () => {
+      test("Delete student", async ({ page, studentPage }) => {
+        await deleteElement(studentPage.page, "Lý Minh Khang");
+        await studentPage.page.getByRole("button", { name: "Yes" }).click();
+        await expect(page.getByText(notification.deleteSuccess)).toBeVisible();
+      });
+    });
+
+    test.describe("Histiory button function", () => {
+      test("Check history button", async ({ page, studentPage }) => {
+        await studentPage.clickHistoryButton("Lý Minh Khang");
+        await page.waitForTimeout(TIMEOUTS.long);
+      });
+    });
     test.describe("Student Page Pagination function", () => {
       const paginationOptions = pagination.options;
       paginationOptions.forEach((option) => {

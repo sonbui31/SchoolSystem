@@ -1,7 +1,5 @@
 import { Page } from "@playwright/test";
-import { error } from "console";
 import path from "path";
-import { selectPaginationOption } from "../utils/actions/paginationUtils";
 
 export const urls = {
   login: "https://classroom-management.vfast.pro",
