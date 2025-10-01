@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import path from "path";
 
 export async function goToUrl(page: Page, url: string) {
@@ -13,38 +13,36 @@ export async function selectDropdownOption(
   page: Page
 ) {
   await triggerLocator.click({ force: true });
-  await page.waitForSelector(".ant-select-dropdown"); // chờ dropdown mở
+  // await page.waitForSelector(".ant-select-dropdown"); // chờ dropdown mở
   // await triggerLocator.fill(optionText);
-
-  const input = triggerLocator.locator(
-    "input.ant-select-selection-search-input"
+  const dropdown = page.locator(
+    ".ant-select-dropdown:not(.ant-select-dropdown-hidden)"
   );
-  if (await input.count()) {
-    await input.fill(optionText);
-    await page.waitForTimeout(300); // cho AntD render lại option
-  }
+  await dropdown.waitFor({ state: "visible", timeout: 5000 });
 
-  const noData = page.locator(".ant-select-dropdown .ant-empty");
+  // const noData = page.locator(".ant-select-dropdown .ant-empty");
+
   const dropdownOption = page
     .locator(".ant-select-dropdown .ant-select-item-option")
     .filter({ hasText: optionText });
   await page.waitForTimeout(500);
-  const optionCount = await dropdownOption.count();
 
-  if (optionCount === 0) {
-    // Không có item nào, expect hiện No data
-    await expect(noData).toBeVisible({ timeout: 5000 });
-    return; // không click nữa
+  if ((await dropdownOption.count()) === 0) {
+    await dropdown
+      .locator(".ant-select-item-option")
+      .last()
+      .scrollIntoViewIfNeeded();
   }
+
+  // const noData = dropdown.getByText("No data");
+  // const optionCount = await dropdownOption.count();
+  // if (optionCount === 0) {
+  //   // Không có item nào, expect hiện No data
+  //   await expect(noData).toBeVisible({ timeout: 5000 });
+  //   return; // không click nữa
+  // }
   await dropdownOption.first().click();
 }
-// export async function clickDropdownOption(
-//   comboLocator: Locator,
-//   optionText: string,
-//   page: Page
-// ) {
-//   await selectDropdownOption(comboLocator, optionText, page);
-// }
 
 export async function uploadImage(fileInput: Locator, filePath: string) {
   const absolutePath = path.resolve(filePath);

@@ -347,8 +347,14 @@ test.describe("Student management", async () => {
     });
     test.describe.only("Edit student function", () => {
       test.describe("Edit student with input require", () => {
-        type EditRequireKey = keyof typeof DATA_STUDENT.editDataRequire;
-        const updateData: { case: string; key: EditRequireKey }[] = [
+        type EditRequireKey =
+          | keyof typeof DATA_STUDENT.editDataRequire.requirInput
+          | "all";
+        const updateData: {
+          case: string;
+          key: EditRequireKey;
+          isNegative?: boolean;
+        }[] = [
           { case: "full name", key: "fullName" },
           { case: "email", key: "email" },
           { case: "class", key: "class" },
@@ -370,17 +376,20 @@ test.describe("Student management", async () => {
         };
 
         for (const value of updateData) {
-          test(`Edit valid ${value.case} text box`, async ({ page, studentPage }) => {
+          test(`Edit  ${value.case} text box`, async ({
+            page,
+            studentPage,
+          }) => {
             if (value.key === "all") {
-              //Case sửa tất cả ô 
-              const allData = DATA_STUDENT.editDataRequire.all;
+              //Case sửa tất cả ô
+              const allData = DATA_STUDENT.editDataRequire.requirInput.all;
               await studentPage.editStudentForm(currentFullName, allData);
               await expect(
                 page.getByText(notification.updatedSuccessfully)
               ).toBeVisible();
               currentFullName = allData.fullName;
             } else if (value.key) {
-              const data = DATA_STUDENT.editDataRequire[value.key];
+              const data = DATA_STUDENT.editDataRequire.requirInput[value.key];
               await studentPage.editStudentForm(currentFullName, {
                 [keyMap[value.key] ?? value.key]: data[value.key],
               });
@@ -388,7 +397,7 @@ test.describe("Student management", async () => {
                 page.getByText(notification.updatedSuccessfully)
               ).toBeVisible();
 
-              if (value.key === "fullName" && data.fullName) {
+              if (value.key === "fullName") {
                 currentFullName = data.fullName;
               }
             }
